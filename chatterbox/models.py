@@ -9,12 +9,12 @@ class Room(models.Model):
     updated = models.DateTimeField(auto_now=True)
 
     class Meta:
-        ordering = [ '-created', '-updated']
+        ordering = ['-created', '-updated']
 
     def __str__(self):
         return self.name
 
-class Message(models.Model): # nazvz tab vzdy jen jednotne cislo
+class Message(models.Model): # nazvy tab vzdy jen jednotne cislo
     body = models.TextField()
     room = models.ForeignKey(Room, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)

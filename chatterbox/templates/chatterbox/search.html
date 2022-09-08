@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h1>vysledky hledani</h1>
+    <h2>Rooms: </h2>
+    <ul>
+        {% for room in rooms %}
+            <li>{{ room.name }}</li>
+        {% endfor %}
+    </ul>
+    <h2>Messages: </h2>
+    <ul>
+        {% for message in messages %}
+            <li><b>{{ message.user }}:</b> {{ message.body }}</li>
+        {% endfor %}
+    </ul>
+
+</body>
+</html>
