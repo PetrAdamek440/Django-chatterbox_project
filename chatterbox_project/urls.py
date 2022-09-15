@@ -14,14 +14,24 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 
 import chatterbox.views
 
 urlpatterns = [
-    path('', chatterbox.views.home, name='home'),
     path('admin/', admin.site.urls),
+
+    # chatterbox aplications:
+    # path(cesta, view, name)
+    path('', chatterbox.views.home, name='home'),
     path('hello/<s>', chatterbox.views.hello),
     path('search/<s>', chatterbox.views.search),
-    path('room/<str:pk>/', chatterbox.views.room, name="room")
+    path('room/<str:pk>/', chatterbox.views.room, name="room"),
+    path('rooms/', chatterbox.views.rooms, name='rooms'),
+
+    # accounts application:
+    path("accounts/", include("accounts.urls")), # sign up
+    path("accounts/", include("django.contrib.auth.urls")), # ostatni
+
+    # path("__reload__/", include("django_browser_reload.urls"))
 ]

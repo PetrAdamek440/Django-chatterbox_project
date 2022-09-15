@@ -1,43 +1,25 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title> <!-- bude se dynamicky menit-->
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
+{% extends 'main.html' %}
 
-<header>Chatterbox</header>
+{% block title %}Room: {{ room.name }}{% endblock %}
 
-<nav>
-  <ul>
-    <li><a href="/">Home</a></li>
-    <li><a href="/">Create room</a></li> <!-- only if log in-->
-    <li><a href="/">Room</a></li> <!-- only if log in-->
-    <li class="last-item"><a href="">Log in / Sign up</a></li>
-  </ul>
-</nav>
-
-<main>
+{% block content %}
     <div class="room-descr">
-        You are in room <b>Room name</b> <br>
-        Description: Description of the room.
+        You are in room <b>{{ room.name }}</b> <br>
+        Description: {{ room.description }}
     </div>
+
     <div class="message-form">
-        <form action="" method="POST">
+        <form action="" method="POST"> <!-- TODO add action -->
             <label for="body">Message: </label>
-            <textarea name="body" id="body" rows="4" cols="50"> </textarea>
+            <textarea name="body" id="body" rows="1" cols="100"> </textarea>
             <input type="submit" value="Send">
         </form>
     </div>
+
     <div class="messages-box">
-        <div class="other-message">Nejaka zprava od uzivatele.</div>
-        <div class="my-message">Moje zprava.</div>
-        <div class="other-message">Nejaka zprava od uzivatele.</div>
-        <div class="my-message">Moje zprava.</div>
+    {% for message in messages %}
+        <div class="other-message"><b>{{ message.user }}:</b> {{ message.body }}</div>
+        <!-- TODO add my-message -->
+    {% endfor %}
     </div>
-
-</main>
-
-</body>
-</html>
+{% endblock %}

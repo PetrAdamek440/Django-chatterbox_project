@@ -1,3 +1,103 @@
+/* common styles */
 body {
     background: #add8e6;
 }
+
+header {
+    font-size: 40px;
+}
+
+nav ul {
+    list-style: none;
+}
+
+nav li {
+    display: inline-block;
+    margin: -3px;
+    /*
+    margin-right: 10px;
+    margin-left: 10px;
+    */
+    border: solid 2px #4432a8;
+    padding: 10px;
+}
+
+/* home.html */
+.welcome {
+    font-size: 32px;
+}
+
+.user_hello {
+    font-size: 32px;
+    padding-bottom: 15px;
+}
+
+/* list_of_rooms.html */
+.list-of-rooms {
+    font-size: 32px;
+}
+
+.rooms-list ul {
+    list-style: none;
+}
+
+/* room.html */
+.room-descr {
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+
+.message-form {
+    margin-bottom: 20px;
+}
+
+input[type=text] {
+    width: 400px;
+}
+
+input[type=submit] {
+    width: 50px;
+}
+
+.messages-box {
+}
+
+.other-message {
+    background: white;
+    width: 80%;
+    border: solid 3px #4432a8;
+    border-radius: 10px;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.my-message {
+    background: white;
+    width: 80%;
+    border: solid 3px #b81a51;
+    border-radius: 10px;
+    padding: 10px;
+    margin-right: 0;
+    margin-bottom: 10px;
+    margin-left: auto;
+}
+
+/* create_room.html */
+.form-name {
+    margin-bottom: 15px;
+}
+
+.label {
+    width: 90px;
+    float:left;
+}
+
+.submit {
+    margin-left: 90px;
+}
+
+/* login.html */
+.form-row {
+    margin-bottom: 15px;
+}
+
