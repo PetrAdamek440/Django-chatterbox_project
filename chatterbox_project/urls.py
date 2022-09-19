@@ -29,9 +29,12 @@ urlpatterns = [
     path('room/<str:pk>/', chatterbox.views.room, name="room"),
     path('rooms/', chatterbox.views.rooms, name='rooms'),
 
+    path('create_room/', chatterbox.views.create_room, name="create_room"),
+    # path('create_room/new_room', chatterbox.views.new_room, name="new_room"),
+
     # accounts application:
     path("accounts/", include("accounts.urls")), # sign up
     path("accounts/", include("django.contrib.auth.urls")), # ostatni
 
-    # path("__reload__/", include("django_browser_reload.urls"))
+    path("__reload__/", include("django_browser_reload.urls")) # reload pro zadavani nove zpravy v room
 ]

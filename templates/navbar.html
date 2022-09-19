@@ -3,8 +3,9 @@
     <ul>
         <li><a href="{% url 'home' %}">Home</a></li>
         {% if request.user.is_authenticated %}
-            <li><a href="{% url 'home' %}">Create room</a></li> <!-- TODO Create room -->
+            <li><a href="{% url 'create_room' %}">Create room</a></li> <!-- TODO Create room: new_room -->
             <li><a href="{% url 'rooms' %}">Rooms</a></li>
+            <!-- TODO {{ request.user.username }} -->
             <li class="last-item"><a href="{% url 'logout' %}">Logout</a></li>
         {% endif %}
         {% if not request.user.is_authenticated %}
