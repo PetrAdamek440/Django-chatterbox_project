@@ -125,3 +125,9 @@ input[type=submit] {
 .form-row {
     margin-bottom: 15px;
 }
+
+.log-right {
+    /* float: right;
+    margin-right 40px; */
+
+}

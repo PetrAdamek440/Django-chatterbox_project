@@ -1,6 +1,10 @@
 from django.contrib.auth.decorators import login_required
+from django.forms import ModelForm
 from django.http import HttpResponse
 from django.shortcuts import render, redirect, HttpResponseRedirect
+from django.urls import reverse_lazy
+from django.utils.decorators import method_decorator
+from django.views.generic import UpdateView
 
 from chatterbox.models import Room, Message
 
@@ -64,6 +68,7 @@ def create_room(request):
         desc = request.POST.get('desc').strip()
         if len(name) > 0 and len(desc) > 0:
             room = Room.objects.create(
+                host=request.user,
                 name=name,
                 description=desc
             )
@@ -84,4 +89,27 @@ def new_room(request):
 
     return redirect('home')
 '''
+@login_required
+def delete_room(request, pk):
+    room = Room.objects.get(id=pk)
+    room.delete()
 
+    return redirect('rooms')
+
+
+# formular:
+# @method_decorator(login_required, name='dispatch')
+class RoomEditForm(ModelForm):
+
+    class Meta:
+        model = Room
+        fields = '__all__'
+
+# Class-Based View :
+# https://python.en.sdacademy.pro/_slides/backend_technologies/cbv.html#/
+@method_decorator(login_required, name='dispatch')
+class EditRoom(UpdateView):
+    template_name = 'chatterbox/edit_room.html'
+    model = Room
+    form_class = RoomEditForm
+    success_url = reverse_lazy('rooms')

@@ -13,6 +13,6 @@ class SignUpForm(UserCreationForm):
 
 
 class SignUpView(generic.CreateView):
-    form_class =  SignUpForm # UserCreationForm
+    form_class = SignUpForm  # UserCreationForm
     success_url = reverse_lazy("login")
     template_name = 'accounts/signup.html'

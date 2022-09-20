@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    # browser reaload
+    # browser reload
     'django_browser_reload',
 
     # nase aplikace v ramci projektu:
