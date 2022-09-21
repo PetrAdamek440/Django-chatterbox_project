@@ -1,4 +1,5 @@
 from django.contrib.auth.decorators import login_required
+from django.core.files.storage import FileSystemStorage
 from django.forms import ModelForm
 from django.http import HttpResponse
 from django.shortcuts import render, redirect, HttpResponseRedirect
@@ -21,29 +22,55 @@ def home(request):
     return render(request, 'chatterbox/home.html', context)
 
 @login_required
+def search(request):
+    if request.method == 'POST':  # pokud pošleme dotaz z formuláře
+        s = request.POST.get('search')                       # z odeslané proměnné si vytáhnu, co chci hledat
+        s = s.strip()                                        # ořízneme prázdné znaky
+        if len(s) > 0:                                       # pkud s obsahuje alespoň jeden znak
+            rooms = Room.objects.filter(name__contains=s)        # vyfiltruji místnosti dle zadaného řetězce
+            messages = Message.objects.filter(body__contains=s)  # vyfiltruji zprávy dle zadaného řetezce
+
+            context = {'rooms': rooms, 'messages': messages, 'search': s}     # výsledky uložím do kontextu
+            return render(request, "chatterbox/search.html", context)  # vykreslíme stránku s výsledky
+        return redirect('home')
+                                                         # pokud POST nebyl odeslán
+    # context = {'rooms': None, 'messages': None}        # místnosti i zprávy budou prázdné
+    return redirect('home')                              # případně lze přesměrovat na jinou stránku
+
+'''
+@login_required
 def search(request, s):
     rooms = Room.objects.filter(name__contains=s)
     messages = Message.objects.filter(body__contains=s)
 
     context = {'rooms': rooms, 'messages': messages}
     return render(request, "chatterbox/search.html", context)
+'''
 
 @login_required
 def room(request, pk):
     room = Room.objects.get(id=pk)  # najdeme místnost se zadaným id
     messages = Message.objects.filter(room=pk)  # vybereme všechny zprávy dané místnosti
 
-    # zpracovani nove zpravy:
+    # pokud zadáme novou zprávu, musíme ji zpracovat
     if request.method == 'POST':
+        file_url = ""
+        if request.FILES.get('upload'):                        # pokud jsme poslali soubo
+            upload = request.FILES['upload']               # z requestu si vytáhnu soubor
+            file_storage = FileSystemStorage()             # práce se souborovým systémem
+            file = file_storage.save(upload.name, upload)  # uložíme soubor na disk
+            file_url = file_storage.url(file)              # vytáhnu ze souboru url adresu a uložím
         body = request.POST.get('body').strip()
-        if len(body) > 0:
+        if len(body) > 0 or request.FILES.get('upload'):
             message = Message.objects.create(
                 user=request.user,
                 room=room,
-                body=body
+                body=body,
+                file=file_url                              # vložíme url souboru do databáze
             )
-            return HttpResponseRedirect(request.path_info)
+        return HttpResponseRedirect(request.path_info)
 
+    #return redirect('room')
     context = {'room': room, 'messages': messages}
     return render(request, "chatterbox/room.html", context)
 
@@ -92,8 +119,18 @@ def new_room(request):
 @login_required
 def delete_room(request, pk):
     room = Room.objects.get(id=pk)
-    room.delete()
+    if room.messages_count() == 0:  # pokud v místnosti není žádná zpráva
+        room.delete()               # tak místnost smažeme
 
+        return redirect('rooms')
+
+    context = {'room': room, 'message_count': room.messages_count()}
+    return render(request, 'chatterbox/delete_room.html', context)
+
+@login_required
+def delete_room_yes(request, pk):
+    room = Room.objects.get(id=pk)
+    room.delete()
     return redirect('rooms')
 
 

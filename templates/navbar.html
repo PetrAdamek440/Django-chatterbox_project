@@ -3,19 +3,22 @@
     <ul>
         <li><a href="{% url 'home' %}">Home</a></li>
         {% if request.user.is_authenticated %}
-            <li><a href="{% url 'create_room' %}">Create room</a></li> <!-- TODO Create room: new_room -->
             <li><a href="{% url 'rooms' %}">Rooms</a></li>
-        <li class="last-item"> User: <i> {{ request.user.username }} --- </i> <a href="{% url 'logout' %}"> Logout </a></li>
+            <li><a href="{% url 'create_room' %}">Create room</a></li> <!-- TODO Create room: new_room -->
         {% endif %}
+
+         {% if not request.user.is_authenticated %}
+            <li><a href="{% url 'rooms' %}">Rooms</a></li>
+        {% endif %}
+
+    <li class="log-right">
+        {% if request.user.is_authenticated %}
+            <div> User: <i> {{ request.user.username }} </i> - <a href="{% url 'logout' %}"> Logout </a></div>
+        {% endif %}
+
         {% if not request.user.is_authenticated %}
-            <li class="last-item"><a href="{% url 'login' %}">Login/Signup</a></li>
+            <div> <a href="{% url 'login' %}"> Login/Signup </a> </div>
         {% endif %}
-    </ul>
-    <ul class="log-right">
-        <li class="last-item"> User: <i> {{ request.user.username }} --- </i> <a href="{% url 'logout' %}"> Logout </a></li>
-          {% if not request.user.is_authenticated %}
-        <li class="last-item"><a href="{% url 'login' %}">Login/Signup</a></li>
-          {% endif %}
-        </li>
+    </li>
     </ul>
 </nav>

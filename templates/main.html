@@ -11,6 +11,15 @@
 
 <header>Chatterbox</header>
 
+{% if request.user.is_authenticated %}
+<div id="search">
+    <form action="/search/" method="post">
+            {% csrf_token %}
+            <input class="text" name="search" size="32" />
+    </form>
+</div>
+{% endif %}
+
 {% include 'navbar.html' %}
 
 <main>

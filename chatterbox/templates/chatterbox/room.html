@@ -8,12 +8,13 @@
         Description: {{ room.description }}
     </div>
     <div class="message-form">
-        <form action="" method="POST">
-            {% csrf_token %}
-            <label for="body">Message: </label>
-            <textarea name="body" id="body" rows="1" cols="100"> </textarea>
-            <input type="submit" value="Send">
-        </form>
+      <form action="" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <label for="body">Message: </label>
+        <textarea name="body" id="body" rows="1" cols="100"> </textarea>
+        <input type="file" name="upload" accept="image/*">  <!-- accept=".doc, .pdf, .txt" --> <!-- accept="*" ... tj. vsechno-->
+        <input type="submit" value="Send">
+      </form>
     </div>
     <div class="messages-box">
     {% for message in messages %}
@@ -25,6 +26,11 @@
                 </div>
                 <div class="my-message-body">{{ message.body }}</div>
             </div>
+        {% if message.file %}  <!-- TODO add in form -->
+          <div class="my-message-file">
+             <a href="{{ message.file }}"> <img src="{{ message.file }}" width="50px"> </a>
+          </div>
+        {% endif %}
         {% else %}
             <div class="other-message">
                 <div class="other-message-info">
@@ -33,6 +39,11 @@
                 </div>
                 <div class="other-message-body">{{ message.body }}</div>
             </div>
+        {% if message.file %}  <!-- TODO add in form -->
+          <div class="other-message-file">
+             <a href="{{ message.file }}"> <img src="{{ message.file }}" width="50px"> </a>
+          </div>
+        {% endif %}
         {% endif %}
     {% endfor %}
     </div>
