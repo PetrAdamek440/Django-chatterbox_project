@@ -1,0 +1,15 @@
+{% extends 'main.html' %}
+
+{% block title %}Users{% endblock %}
+
+{% block content %}
+<div class="list-of-users">List of users:</div>
+    <ul>
+    {% for profile in profiles %}
+        <li>
+        <a href="{% url 'profile' profile.id %}">{{ profile.user.username }}</a> <!-- TODO ZMENIT  HOME NA USER -->
+        </li>
+    {% endfor%}
+    <ul>
+
+{% endblock %}

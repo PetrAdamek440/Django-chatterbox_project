@@ -5,6 +5,7 @@
         {% if request.user.is_authenticated %}
             <li><a href="{% url 'rooms' %}">Rooms</a></li>
             <li><a href="{% url 'create_room' %}">Create room</a></li> <!-- TODO Create room: new_room -->
+            <li><a href="{% url 'profiles' %}">Users</a></li> <!-- TODO url -->
         {% endif %}
 
          {% if not request.user.is_authenticated %}

@@ -195,3 +195,24 @@ nav li.log-right {
     margin-left: 78%;
 }
 
+.yes {
+    width: 50px;
+    border: solid 2px red;
+    padding: 10px;
+}
+
+.no {
+    width: 50px;
+    border: solid 2px red;
+    padding: 10px;
+}
+
+center.yes-no {
+
+    width: 550px;
+
+    border: solid 2px red;
+    padding: 10px;
+
+    background: yellow;
+}

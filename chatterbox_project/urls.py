@@ -21,6 +21,8 @@ import chatterbox.views
 from django.conf import settings  # add this
 from django.conf.urls.static import static  # add this
 
+import profiles.views
+
 urlpatterns = [
     path('admin/', admin.site.urls),
 
@@ -47,5 +49,11 @@ urlpatterns = [
     path("accounts/", include("accounts.urls")), # sign up
     path("accounts/", include("django.contrib.auth.urls")), # ostatni
 
-    path("__reload__/", include("django_browser_reload.urls")) # reload pro zadavani nove zpravy v room
+    path("__reload__/", include("django_browser_reload.urls")), # reload pro zadavani nove zpravy v room
+
+    # profiles aplikace:
+    path('users/', profiles.views.profiles_list, name='profiles'),
+    path('user/<pk>', profiles.views.user_profile, name='profile'),
+    path('edituser/<pk>/', profiles.views.EditProfile.as_view(), name='editprofile'),
+
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)  # add static
