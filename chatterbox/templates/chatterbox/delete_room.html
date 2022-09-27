@@ -5,17 +5,11 @@
 {% block title %}Delete room{% endblock %}
 
 {% block content %}
-  <center>
-      <center class="yes-no">
-          Opravdu chcete smazat místnost <b>{{ room.name }}</b>, která obsahuje {{ message_count }} zpráv?
-      </center>
-      <center class="yes-no">
-          <div class="yes">
-          <a href="{% url 'delete_room_yes' room.id %}">Yes</a>
-          </div>
-          <div class="no">
-            <a href="{% url 'rooms' %}">No</a>
-          </div>
-      </center>
-  </center>
+  Opravdu chcete smazat místnost <b>{{ room.name }}</b>, která obsahuje {{ message_count }} zpráv.
+  <div class="yes">
+    <a href="{% url 'delete_room_yes' room.id%}">YES</a>
+  </div>
+  <div class="no">
+    <a href="{% url 'rooms' %}">NO</a>
+  </div>
 {% endblock %}

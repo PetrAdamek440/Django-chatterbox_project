@@ -1,11 +1,11 @@
 {% extends 'main.html' %}
 
-{% block title %} Edit/update room {% endblock %}
+{% block title %}Chatterbox - rooms{% endblock %}
 
 {% block content %}
-     <form action="" method="POST">
-          {% csrf_token %}
-          <table> {{ form }}</table>
-          <button type="submit">Submit</button>
-     </form>
+    <form method="post" action="">
+        {% csrf_token %}
+        <table>{{ form }}</table>
+        <button type="submit">Submit</button>
+    </form>
 {% endblock %}

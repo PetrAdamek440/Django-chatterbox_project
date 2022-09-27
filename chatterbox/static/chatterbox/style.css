@@ -7,6 +7,30 @@ header {
     font-size: 40px;
 }
 
+/* css for search */
+#search {
+   position: absolute;
+   top: 10px;
+   right: 28px;
+   height: 50px;
+   line-height: 50px;
+}
+
+#search input.text {
+   padding: 10px 40px 10px 10px;
+   background: rgba(222, 231, 250, 1) url(/static/chatterbox/search.png) top right no-repeat;
+   color: black;
+   width: 200px;
+   border: solid 1px #3c3c3c;
+}
+#search .search-button{
+   padding: 10px 40px 10px 10px;
+   background: rgba(222, 231, 250, 1) url(/static/chatterbox/search.png) top right no-repeat;
+   color: black;
+   width: 200px;
+   border: solid 1px #3c3c3c;
+}
+
 nav ul {
     list-style: none;
 }
@@ -20,6 +44,11 @@ nav li {
     */
     border: solid 2px #4432a8;
     padding: 10px;
+}
+
+.last-item{
+    float: right;
+    margin-right: 40px;
 }
 
 /* home.html */
@@ -60,7 +89,6 @@ input[type=submit] {
 }
 
 .messages-box {
-
 }
 
 .other-message-body {
@@ -81,6 +109,22 @@ input[type=submit] {
     width: 20%;
     margin-right: 0;
     margin-left: auto;
+}
+
+.my-message-file {
+    width: 50px;
+    border: solid 2px #b81a51;
+    margin-top: -15px;
+    margin-right: 10px;
+    margin-left: auto;
+}
+
+.other-message-file {
+    width: 50px;
+    border: solid 2px #b81a51;
+    margin-top: -15px;
+    margin-left: 10px;
+    margin-right: auto;
 }
 
 .other-message-info {
@@ -124,95 +168,4 @@ input[type=submit] {
 /* login.html */
 .form-row {
     margin-bottom: 15px;
-}
-
-/*
-.right {
-    , float: right;
-    margin-right 40px; ,
-    margin-right: 0px;
-    margin-left: auto;
-
-}
-*/
-
-nav li.log-right {
-    margin-right: 0px;
-    margin-left: 75%;
-}
-
-/*
-#search {
-    margin-right: 0px;
-    margin-left: 75%;
-}
-
-#search input text {
-   padding: 10px 40px 10px 10px;
-   background: rgba(222, 231, 250, 1) url(/static/chatterbox/search.png) top right no-repeat;
-   color: black;
-   width: 200px;
-   border: solid 1px #3c3c3c;
-}
-*/
-
-/* css for search */
-#search {
-
-   margin-right: 0px;
-   margin-left: 75%;
-   /*
-   position: absolute;
-   top: 10px;
-   right: 28px;
-   */
-   height: 50px;
-
-   line-height: 50px;
-}
-
-#search input.text {
-   padding: 10px 40px 10px 10px;
-   background: rgba(222, 231, 250, 1) url(/static/chatterbox/search.png) top right no-repeat;
-   color: black;
-   width: 200px;
-   border: solid 1px #3c3c3c;
-}
-
-.my-message-file {
-    width: 50px;
-    border: solid 2px #b81a51;
-    margin-top: -30px;
-    margin-right: 10px;
-    margin-left: auto;
-}
-
-.other-message-file {
-    width: 50px;
-    border: solid 2px #b81a51;
-    margin-top: -30px;
-    margin-right: auto;
-    margin-left: 78%;
-}
-
-.yes {
-    width: 50px;
-    border: solid 2px red;
-    padding: 10px;
-}
-
-.no {
-    width: 50px;
-    border: solid 2px red;
-    padding: 10px;
-}
-
-center.yes-no {
-
-    width: 550px;
-
-    border: solid 2px red;
-    padding: 10px;
-
-    background: yellow;
 }

@@ -1,15 +1,23 @@
 {% extends 'main.html' %}
 
-{% block title %}Users{% endblock %}
+{% block title %} Users {% endblock %}
 
 {% block content %}
 <div class="list-of-users">List of users:</div>
     <ul>
-    {% for profile in profiles %}
+    {% for user in users %}
         <li>
-        <a href="{% url 'profile' profile.id %}">{{ profile.user.username }}</a> <!-- TODO ZMENIT  HOME NA USER -->
+        {% if user.userprofile %}
+            <a href="{% url 'profile' user.userprofile.id%}"> {{ user.username }} </a>
+        {% else %}
+            {{ user.username }}
+            {% if user == request.user %}
+            <a href="{% url 'createprofile' %}">Create profile</a>
+            {% endif %}
+        {% endif %}
+            <!-- TODO ZMENIT  HOME NA USER -->
         </li>
     {% endfor%}
-    <ul>
+    </ul>
 
 {% endblock %}

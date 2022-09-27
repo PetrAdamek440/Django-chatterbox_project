@@ -1,18 +1,19 @@
+from django.contrib.auth.models import User
 from django.db import models
-from django.contrib.auth.models import AbstractUser, User
 
 
+# Create your models here.
 class Room(models.Model):
-    host = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+    host = models.ForeignKey(User, on_delete=models.SET_NULL, null=True) # pomoze nam identifikovat kto vytvoril roomku
     name = models.CharField(max_length=200)
     description = models.TextField(null=True, blank=True)
     # participants = models.ManyToManyField(
-    #     User, related_name='participants', blank=True)
-    updated = models.DateTimeField(auto_now=True)
+    #       User, related_name='participants', blank=True)
     created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
 
     class Meta:
-        ordering = ['-updated', '-created']
+        ordering = ['-created', '-updated'] # zoradi od najnovsej nahore nie od najstarsich
 
     def __str__(self):
         return self.name
@@ -23,19 +24,25 @@ class Room(models.Model):
 
     def last_message_time(self):
         room_message = self.message_set.all()[0]
-        return room_message.created
+        return room_message.updated
 
 
 class Message(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    body = models.TextField(null=False, blank=False)
     room = models.ForeignKey(Room, on_delete=models.CASCADE)
-    body = models.TextField()
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     file = models.TextField(null=True)
-    updated = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
 
     class Meta:
-        ordering = ['-updated', '-created']
+        ordering = ['-created', '-updated'] # - nam zoradi opacne aod najnovsieho nie od najstarsieho
 
     def __str__(self):
         return self.body[0:50]
+
+
+
+
+
+

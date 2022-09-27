@@ -9,6 +9,8 @@ https://docs.djangoproject.com/en/4.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
+
+# sem budeme pridavat
 import os
 from pathlib import Path
 
@@ -20,7 +22,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-5g8axmj%(#wy(r@3o1r1w6mtf7r(r-#b8kg@21k2%cf9so4pkc'
+SECRET_KEY = 'django-insecure-tp(s)ycha(9ftnhlo@x!mv(racxp1)5!e4=zh@^2)8a*y0(wc$'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -39,12 +41,11 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     # browser reload
-    'django_browser_reload',
+    "django_browser_reload",
 
-    # nase aplikace v ramci projektu:
+    # odtialto dopisujem nase aplikacie
     'chatterbox',
     'accounts',
-
     'profiles',
 ]
 
@@ -56,6 +57,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # pridane nami
     'django_browser_reload.middleware.BrowserReloadMiddleware',
 ]
 
@@ -126,14 +128,14 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = 'static/'
-MEDIA_URL = 'media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = 'media/'  # PRIDALI SME
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')  #PRIDALI SME  - add MEDIA_ROOT
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# Login and authentication
-LOGIN_REDIRECT_URL = "home"
-LOGOUT_REDIRECT_URL = "login"
+# login and authentication - PRIDALI SME MY
+LOGIN_REDIRECT_URL = 'home'
+LOGOUT_REDIRECT_URL = 'login'

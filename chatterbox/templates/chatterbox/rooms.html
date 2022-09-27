@@ -11,26 +11,17 @@
             {% for room in rooms %}
             <li>
                 <a href="{% url 'room' room.id %}">{{ room.name }}</a> {{ room.description }}
-                  {% if room.host %}
+                {% if room.host %}
                     Host: {{ room.host }}
-                    {% if room.host.id == request.user.id %} <!-- pokud je aktualne prihlaeny uzivatel ten, co tu mistnost vytvoril... -->
-                    <a href="{% url 'delete_room' room.id %}">
-                        <img src="{% static 'chatterbox/cross.png' %}" alt="delete" width="12px">
-                    </a>
-                      <b> /// </b>
-                    <a href="{% url 'edit_room' room.id %}"> edit</a>
-                   {% else %}
-                    <b> you cannot delete / edit this room </b>
+                    {% if room.host.id == request.user.id %}  <!-- Pokud je aktuálně přihlášený uživatel "majitel" místnosti -->
+                        <a href="{% url 'delete_room' room.id %}"><img src="{% static 'chatterbox/cross.png' %}" alt='delete' width="12px"></a>
+                        <a href="{% url 'edit_room' room.id %}">✎</a>
                     {% endif %}
-                  {% else %}
-                    Host: not known host
-                  {% endif %}
-                 ( {{ room.messages_count }} messages)
-                {% if  room.messages_count > 0 %}
-                    (last message update: {{ room.last_message_time }})
+                {% endif %}
+                {% if room.messages_count > 0 %}
+                    ({{ room.messages_count }} messages, last message date: {{ room.last_message_time }})
                 {% else %}
-                    (last message update: (no updates))
-                <!-- TODO (#n messages from #m users, last message date: date/time of last message) -->
+                    (no message yet)
                 {% endif %}
             </li>
             {% endfor %}
